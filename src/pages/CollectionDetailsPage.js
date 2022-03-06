@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import AddCard from "../components/AddCard";
 import axios from "axios";
  
 const API_URL = "http://localhost:5005";  
@@ -35,9 +36,10 @@ function CollectionDetailsPage (props) {
       {collection && (
         <>
           <h1>{collection.title}</h1>
-          
         </>
       )}
+
+      <AddCard refreshCollection={getCollection} collectionId={collectionId} />    
 
       {collection &&
         collection.cards.map((card) => (
