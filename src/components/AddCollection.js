@@ -14,8 +14,6 @@ function AddCollection(props) {
 
     const uploadData = new FormData();
 
-    // imageUrl => this name has to be the same as in the model since we pass
-    // req.body to .create() method when creating a new movie in '/api/movies' POST route
     uploadData.append("imageUrl", e.target.files[0]);
 
     console.log("uploadData: ", uploadData);
@@ -62,6 +60,7 @@ function AddCollection(props) {
           onChange={(e) => setTitle(e.target.value)}
         />
 
+       
         <input type="file" onChange={(e) => handleFileUpload(e)} />
 
         <button type="submit">Save New Collection</button>
