@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import AddCard from "../components/AddCard";
+import CardList from "../components/CardList";
+//import CardDetailsPage from "./pages/CardDetailsPage";
 import axios from "axios";
  
 const API_URL = "http://localhost:5005";  
 
 function CollectionDetailsPage (props) {
+  console.log(`Props:`, props)
   const [collection, setCollection] = useState(null);
 
   // Get the URL parameter: collectionId
@@ -16,19 +19,20 @@ function CollectionDetailsPage (props) {
     axios
       .get(`${API_URL}/api/collections/${collectionId}`)
       .then((response) => {
-        //console.log(`From oneCollection:`, response.data)
+        console.log(`From collectiondetails - response:`, response)
         const oneCollection = response.data;
-        //console.log(`From oneCollection:`, oneCollection)
+        console.log(`From collectiondetails - oneCollection:`, oneCollection)
         setCollection(oneCollection);
       })
       .catch((error) => console.log(error));
   };
 
-  //console.log(`From collection:`, collection)
+  console.log(`From collection:`, collection)
   
   useEffect(()=> {
     getCollection();
   }, [] );
+  console.log(` From collectiondetails - collection:`, collection)
 
   
   return (
@@ -40,14 +44,10 @@ function CollectionDetailsPage (props) {
       )}
 
       <AddCard refreshCollection={getCollection} collectionId={collectionId} />    
-
-      {collection &&
-        collection.cards.map((card) => (
-          <li className="TaskCard card" key={card._id}>
-            <h3>{card.title}</h3>
-            <h4>Description:</h4>
-            <p>{card.description}</p>
-          </li>
+      
+     
+      { collection && collection.cards.map((card) => (
+        <CardList key={card._id} {...card} /> 
       ))}
 
       <Link to="/collections">

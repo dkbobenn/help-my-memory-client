@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import CollectionListPage from "../pages/CollectionListPage";
 
@@ -7,13 +7,15 @@ const API_URL = "http://localhost:5005";
 function AddCollection(props) {
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [imageInput, setImageInput] = useState(null);
+  const imageInputRef = useRef();
 
   // ******** this method handles the file upload ********
   const handleFileUpload = (e) => {
     console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadData = new FormData();
-
+    setImageInput(e.target.files[0]);
     uploadData.append("imageUrl", e.target.files[0]);
 
     console.log("uploadData: ", uploadData);
@@ -40,6 +42,8 @@ function AddCollection(props) {
         // Reset the state
         setTitle("");
         setImageUrl("");
+        imageInputRef.current.value = "";
+        setImageInput(null);
         props.refreshCollections();
       })
       .catch((error) =>
@@ -60,8 +64,11 @@ function AddCollection(props) {
           onChange={(e) => setTitle(e.target.value)}
         />
 
-       
-        <input type="file" onChange={(e) => handleFileUpload(e)} />
+        <input
+          type="file"
+          onChange={(e) => handleFileUpload(e)}
+          ref={imageInputRef}
+        />
 
         <button type="submit">Save New Collection</button>
       </form>

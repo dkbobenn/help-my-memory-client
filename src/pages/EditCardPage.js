@@ -1,18 +1,38 @@
-import { useState } from "react";
-//import Dropdown from "react-dropdown";
-import "react-dropdown/style.css";
-//import CollectionDetailsPage from "../pages/CollectionDetailsPage";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const API_URL = "http://localhost:5005";
 
-function AddCards(props) {
+function EditCardPage(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [fileUrl, setFileUrl] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [cardType, setCardType] = useState("standard");
+  const navigate = useNavigate();
+
+  console.log(`EditCard props:`, props )
+
+  // Get the URL parameter :cardId
+  const { cardId } = useParams();
+  console.log(`cardId:`, cardId)
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/api/card/${cardId}`)
+      .then((response) => {
+        //console.log(`Get Response:`, response)
+        const oneCard = response.data;
+        setTitle(oneCard.title);
+        setDescription(oneCard.description)
+        setFileUrl(oneCard.fileUrl);
+        setUsername(oneCard.username);
+        setPassword(oneCard.password)
+      })
+      .catch((error) => console.log(error));
+  }, [cardId]);
+
   // ******** this method handles the file upload ********
   const handleFileUpload = (e) => {
     //console.log("The file to be uploaded is: ", e.target.files[0]);
@@ -34,55 +54,25 @@ function AddCards(props) {
   };
   //console.log("fileUrl is: ", fileUrl);
 
-  const handleSubmit = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(`Addcards - Props:`, props);
+    // Create an object representing the body of the PUT request
+    const requestBody = { title, description, fileUrl, username, password };
 
-    // We need the collection id when creating the new card
-    const { collectionId } = props;
-    console.log(`Addcards - CollectionId:`, collectionId);
-    // Create an object representing the body of the POST request
-    const requestBody = {
-      title,
-      description,
-      fileUrl,
-      username,
-      password,
-      cardType,
-      collectionId,
-    };
-
-    console.log(`Addcards reqbody:`, requestBody);
-
-    //POST for adding cards
+    // Make a PUT request to update the card
     axios
-      .post(`${API_URL}/api/cards`, requestBody)
+      .put(`${API_URL}/api/card/${cardId}/edit`, requestBody)
       .then((response) => {
-        console.log(`Addcards response:`, response);
-        // Reset the state to clear the inputs
-        setTitle("");
-        setDescription("");
-        setFileUrl("");
-        setUsername("");
-        setPassword("");
-        setCardType("standard");
-
-        props.refreshCollection();
-      })
-      .catch((error) => console.log(error));
+        //navigate back to cards page after update
+        navigate("/card/" + cardId);
+      });
   };
 
   return (
-    <div className="AddCards">
-      <h3>Add New Card</h3>
+    <div className="EditCardPage">
+      <h3>Edit the Card</h3>
 
-      <form onSubmit={handleSubmit}>
-        <h3>Select Memory Card Type</h3>
-        <select value={cardType} onChange={(e) => setCardType(e.target.value)}>
-          <option value="standard">Standard</option>
-          <option value="password">Password</option>
-        </select>
-
+      <form onSubmit={handleFormSubmit}>
         <label>Title:</label>
         <input
           type="text"
@@ -91,36 +81,40 @@ function AddCards(props) {
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        <label>Description:</label>
-        <textarea
+<label>Description:</label>
+        <input
           type="text"
           name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <label>Username:</label>
-        <textarea
+<label>Username:</label>
+        <input
           type="text"
-          name="description"
+          name="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
 
-        <label>Password:</label>
-        <textarea
+<label>Password:</label>
+        <input
           type="text"
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 
+
+
+        <label>File:</label>
         <input type="file" onChange={(e) => handleFileUpload(e)} />
 
-        <button type="submit">Add Card</button>
+        <input type="submit" value="Submit" />
       </form>
+
     </div>
   );
 }
 
-export default AddCards;
+export default EditCardPage;
