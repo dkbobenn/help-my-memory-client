@@ -38,7 +38,7 @@ function CardDetailsPage(props) {
     axios
       .delete(`${API_URL}/api/card/${cardId}/delete`)
       .then(() => {
-        console.log(`Delete navigate:`, oneCard.theCollection);
+        //console.log(`Delete navigate:`, oneCard.theCollection);
         navigate(`/collections/${oneCard.theCollection}`);
       })
       .catch((err) => console.log(err));

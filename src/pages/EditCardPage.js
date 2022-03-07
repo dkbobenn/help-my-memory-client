@@ -12,23 +12,26 @@ function EditCardPage(props) {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  console.log(`EditCard props:`, props )
+  console.log(`EditCard props:`, props);
 
   // Get the URL parameter :cardId
   const { cardId } = useParams();
-  console.log(`cardId:`, cardId)
+  //console.log(`cardId:`, cardId)
+
+  let oneCard = undefined;
 
   useEffect(() => {
     axios
       .get(`${API_URL}/api/card/${cardId}`)
       .then((response) => {
-        //console.log(`Get Response:`, response)
-        const oneCard = response.data;
+        oneCard = response.data;
+        console.log(`From oneCard:`, oneCard);
+
         setTitle(oneCard.title);
-        setDescription(oneCard.description)
+        setDescription(oneCard.description);
         setFileUrl(oneCard.fileUrl);
         setUsername(oneCard.username);
-        setPassword(oneCard.password)
+        setPassword(oneCard.password);
       })
       .catch((error) => console.log(error));
   }, [cardId]);
@@ -63,8 +66,8 @@ function EditCardPage(props) {
     axios
       .put(`${API_URL}/api/card/${cardId}/edit`, requestBody)
       .then((response) => {
-        //navigate back to cards page after update
-        navigate("/card/" + cardId);
+        //navigate back to to the collection after update
+        navigate(`/collections/${response.data.theCollection}`);
       });
   };
 
@@ -81,7 +84,7 @@ function EditCardPage(props) {
           onChange={(e) => setTitle(e.target.value)}
         />
 
-<label>Description:</label>
+        <label>Description:</label>
         <input
           type="text"
           name="description"
@@ -89,7 +92,7 @@ function EditCardPage(props) {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-<label>Username:</label>
+        <label>Username:</label>
         <input
           type="text"
           name="username"
@@ -97,7 +100,7 @@ function EditCardPage(props) {
           onChange={(e) => setUsername(e.target.value)}
         />
 
-<label>Password:</label>
+        <label>Password:</label>
         <input
           type="text"
           name="password"
@@ -105,14 +108,11 @@ function EditCardPage(props) {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-
-
         <label>File:</label>
         <input type="file" onChange={(e) => handleFileUpload(e)} />
 
         <input type="submit" value="Submit" />
       </form>
-
     </div>
   );
 }

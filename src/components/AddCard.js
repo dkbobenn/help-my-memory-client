@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 //import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 //import CollectionDetailsPage from "../pages/CollectionDetailsPage";
@@ -13,6 +13,10 @@ function AddCards(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [cardType, setCardType] = useState("standard");
+  const [fileInput, setFileInput] = useState(null);
+  const fileInputRef = useRef();
+
+
   // ******** this method handles the file upload ********
   const handleFileUpload = (e) => {
     //console.log("The file to be uploaded is: ", e.target.files[0]);
@@ -63,6 +67,8 @@ function AddCards(props) {
         setTitle("");
         setDescription("");
         setFileUrl("");
+        fileInputRef.current.value = "";
+        setFileInput(null);
         setUsername("");
         setPassword("");
         setCardType("standard");
@@ -115,7 +121,9 @@ function AddCards(props) {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <input type="file" onChange={(e) => handleFileUpload(e)} />
+        <input type="file"
+         ref={fileInputRef}
+         onChange={(e) => handleFileUpload(e)} />
 
         <button type="submit">Add Card</button>
       </form>
