@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import AddCard from "../components/AddCard";
-import CardDetailsPage from "../pages/CardDetailsPage";
+//import AddCard from "../components/AddCard";
+//import CardDetailsPage from "../pages/CardDetailsPage";
 // We are deconstructing the props object directly in the parentheses of the function
 function CardList({ title, description, _id }) {
   return (

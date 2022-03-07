@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
-//import Dropdown from "react-dropdown";
-import "react-dropdown/style.css";
-//import CollectionDetailsPage from "../pages/CollectionDetailsPage";
 import axios from "axios";
+import { render } from "@testing-library/react";
+//import PasswordCard from "../components/PasswordCard";
+//import StandardCard from "../components/StandardCard";
 
 const API_URL = "http://localhost:5005";
 
@@ -15,7 +15,6 @@ function AddCards(props) {
   const [cardType, setCardType] = useState("standard");
   const [fileInput, setFileInput] = useState(null);
   const fileInputRef = useRef();
-
 
   // ******** this method handles the file upload ********
   const handleFileUpload = (e) => {
@@ -40,11 +39,9 @@ function AddCards(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`Addcards - Props:`, props);
 
-    // We need the collection id when creating the new card
     const { collectionId } = props;
-    console.log(`Addcards - CollectionId:`, collectionId);
+
     // Create an object representing the body of the POST request
     const requestBody = {
       title,
@@ -57,6 +54,7 @@ function AddCards(props) {
     };
 
     console.log(`Addcards reqbody:`, requestBody);
+    console.log(`From cardType:`, cardType);
 
     //POST for adding cards
     axios
@@ -66,69 +64,110 @@ function AddCards(props) {
         // Reset the state to clear the inputs
         setTitle("");
         setDescription("");
-        setFileUrl("");
-        fileInputRef.current.value = "";
-        setFileInput(null);
         setUsername("");
         setPassword("");
         setCardType("standard");
+        setFileUrl("");
+        fileInputRef.current.value = "";
+        setFileInput(null);
 
         props.refreshCollection();
       })
       .catch((error) => console.log(error));
   };
 
-  return (
-    <div className="AddCards">
-      <h3>Add New Card</h3>
+  if (cardType === "standard") {
+    return (
+      <div className="AddCards">
+        <h3>Add New Card</h3>
 
-      <form onSubmit={handleSubmit}>
-        <h3>Select Memory Card Type</h3>
-        <select value={cardType} onChange={(e) => setCardType(e.target.value)}>
-          <option value="standard">Standard</option>
-          <option value="password">Password</option>
-        </select>
+        <form onSubmit={handleSubmit}>
+          <h3>Select Memory Card Type</h3>
+          <select
+            value={cardType}
+            onChange={(e) => setCardType(e.target.value)}
+          >
+            <option value="standard">Standard</option>
+            <option value="password">Password</option>
+          </select>
 
-        <label>Title:</label>
-        <input
-          type="text"
-          name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+          <label>Title:</label>
+          <input
+            type="text"
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
 
-        <label>Description:</label>
-        <textarea
-          type="text"
-          name="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
+          <label>Description:</label>
+          <textarea
+            type="text"
+            name="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
 
-        <label>Username:</label>
-        <textarea
-          type="text"
-          name="description"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={(e) => handleFileUpload(e)}
+          />
 
-        <label>Password:</label>
-        <textarea
-          type="text"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+          <button type="submit">Add Card</button>
+        </form>
+      </div>
+    );
+  } else {
+    return (
+      <div className="AddCards">
+        <h3>Add New Card</h3>
 
-        <input type="file"
-         ref={fileInputRef}
-         onChange={(e) => handleFileUpload(e)} />
+        <form onSubmit={handleSubmit}>
+          <h3>Select Memory Card Type</h3>
+          <select
+            value={cardType}
+            onChange={(e) => setCardType(e.target.value)}
+          >
+            <option value="standard">Standard</option>
+            <option value="password">Password</option>
+          </select>
 
-        <button type="submit">Add Card</button>
-      </form>
-    </div>
-  );
+          <label>Title:</label>
+          <input
+            type="text"
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+
+          <label>Description:</label>
+          <textarea
+            type="text"
+            name="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+
+          <label>Username:</label>
+          <textarea
+            type="text"
+            name="description"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+
+          <label>Password:</label>
+          <textarea
+            type="text"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <button type="submit">Add Card</button>
+        </form>
+      </div>
+    );
+  }
 }
-
 export default AddCards;
