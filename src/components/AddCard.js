@@ -14,7 +14,10 @@ function AddCards(props) {
   const [password, setPassword] = useState("");
   const [cardType, setCardType] = useState("standard");
   const [fileInput, setFileInput] = useState(null);
+  const [passwordShown, setPasswordShown] = useState(false);
   const fileInputRef = useRef();
+
+
 
   // ******** this method handles the file upload ********
   const handleFileUpload = (e) => {
@@ -76,6 +79,12 @@ function AddCards(props) {
       .catch((error) => console.log(error));
   };
 
+  const togglePassword = () => {
+
+    setPasswordShown(!passwordShown);
+
+  };
+
   if (cardType === "standard") {
     return (
       <div className="AddCards">
@@ -112,7 +121,6 @@ function AddCards(props) {
             ref={fileInputRef}
             onChange={(e) => handleFileUpload(e)}
           />
-
           <button type="submit">Add Card</button>
         </form>
       </div>
@@ -157,15 +165,16 @@ function AddCards(props) {
           />
 
           <label>Password:</label>
-          <textarea
-            type="text"
+          <input
+            type={passwordShown ? "text" : "password"}
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-
+          
           <button type="submit">Add Card</button>
         </form>
+        <button onClick={togglePassword}>Show Password</button>
       </div>
     );
   }

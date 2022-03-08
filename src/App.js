@@ -9,6 +9,9 @@ import CollectionDetailsPage from "./pages/CollectionDetailsPage";
 import EditCollectionPage from "./pages/EditCollectionPage";
 import CardDetailsPage from "./pages/CardDetailsPage";
 import EditCardPage from "./pages/EditCardPage";
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
+
 
 function App() {
   return (
@@ -23,6 +26,8 @@ function App() {
         <Route path="/collections/:collectionId/edit" element={<EditCollectionPage />} />
         <Route path="/card/:cardId" element={<CardDetailsPage />} />
         <Route path="/card/:cardId/edit" element={<EditCardPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
       
     </div>

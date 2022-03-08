@@ -8,6 +8,11 @@ function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
+  
+  /* 
+    Functions for handling the authentication status (isLoggedIn, isLoading, user)
+    will be added here later in the next step
+  */
 
     const storeToken = (token) => {       //  <==  ADD
         localStorage.setItem('authToken', token);
@@ -47,20 +52,20 @@ function AuthProviderWrapper(props) {
         }   
       }
 
-      const removeToken = () => {                    // <== ADD
+      const removeToken = () => {                    
         // Upon logout, remove the token from the localStorage
         localStorage.removeItem("authToken");
       }
      
      
-      const logOutUser = () => {                   // <== ADD    
+      const logOutUser = () => {                   
         // To log out the user, remove the token
         removeToken();
         // and update the state variables    
         authenticateUser();
       } 
 
-      useEffect(() => {                 //  <==  ADD                                   
+      useEffect(() => {                                             
         authenticateUser();
       }, []);
 
