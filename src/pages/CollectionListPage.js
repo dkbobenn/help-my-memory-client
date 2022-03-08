@@ -12,8 +12,11 @@ function CollectionListPage() {
   const [collections, setCollections] = useState([]);
 
   const getAllCollections = () => {
+    const storedToken = localStorage.getItem("authToken");
+
     axios
-      .get(`${API_URL}/api/collections`)
+      .get(`${API_URL}/api/collections`,  { headers: { Authorization: `Bearer ${storedToken}` } })
+      
       .then((response) => setCollections(response.data))
       .catch((error) => console.log(error));
   };

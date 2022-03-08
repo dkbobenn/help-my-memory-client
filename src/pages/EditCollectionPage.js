@@ -14,8 +14,12 @@ function EditCollectionPage(props) {
   //console.log(collectionId)
 
   useEffect(() => {
+    const storedToken = localStorage.getItem("authToken");
+
     axios
-      .get(`${API_URL}/api/collections/${collectionId}`)
+      .get(`${API_URL}/api/collections/${collectionId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         // console.log(`Get Response:`, response.data)
         const oneCollection = response.data;
@@ -27,7 +31,7 @@ function EditCollectionPage(props) {
 
   // ******** this method handles the file upload ********
   const handleFileUpload = (e) => {
-    console.log("The file to be uploaded is: ", e.target.files[0]);
+    const storedToken = localStorage.getItem("authToken");
 
     const uploadData = new FormData();
 
@@ -36,7 +40,7 @@ function EditCollectionPage(props) {
     console.log("uploadData: ", uploadData);
 
     axios
-      .post(`${API_URL}/api/upload`, uploadData)
+      .post(`${API_URL}/api/upload`, uploadData, { headers: { Authorization: `Bearer ${storedToken}` } })
       .then((response) => {
         console.log("response is: ", response.data.path);
         // response carries "fileUrl" which we can use to update the state
@@ -62,8 +66,12 @@ function EditCollectionPage(props) {
 
   // Make a DELETE request to delete the Collection
   const deleteCollection = () => {
+    const storedToken = localStorage.getItem("authToken");
+
     axios
-      .delete(`${API_URL}/api/collections/${collectionId}`)
+      .delete(`${API_URL}/api/collections/${collectionId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then(() => {
         navigate("/collections");
       })

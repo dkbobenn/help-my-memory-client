@@ -12,16 +12,21 @@ function AddCollection(props) {
 
   // ******** this method handles the file upload ********
   const handleFileUpload = (e) => {
-    console.log("The file to be uploaded is: ", e.target.files[0]);
+    //console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadData = new FormData();
     setImageInput(e.target.files[0]);
     uploadData.append("imageUrl", e.target.files[0]);
 
-    console.log("uploadData: ", uploadData);
+    //console.log("uploadData: ", uploadData,
+
+    // Get the token from the localStorage
+    const storedToken = localStorage.getItem("authToken");
 
     axios
-      .post(`${API_URL}/api/upload`, uploadData)
+      .post(`${API_URL}/api/upload`, uploadData, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         console.log("response is: ", response.data.path);
         // response carries "fileUrl" which we can use to update the state
@@ -36,8 +41,14 @@ function AddCollection(props) {
 
     const requestBody = { title, imageUrl };
     console.log(requestBody);
+
+    // Get the token from the localStorage
+    const storedToken = localStorage.getItem("authToken");
+
     axios
-      .post(`${API_URL}/api/collections`, requestBody)
+      .post(`${API_URL}/api/collections`, requestBody, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         // Reset the state
         setTitle("");

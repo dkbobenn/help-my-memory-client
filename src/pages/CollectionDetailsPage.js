@@ -4,37 +4,41 @@ import AddCard from "../components/AddCard";
 import CardList from "../components/CardList";
 //import CardDetailsPage from "./pages/CardDetailsPage";
 import axios from "axios";
- 
-const API_URL = "http://localhost:5005";  
 
-function CollectionDetailsPage (props) {
-  console.log(`Props:`, props)
+const API_URL = "http://localhost:5005";
+
+function CollectionDetailsPage(props) {
+  console.log(`Props:`, props);
   const [collection, setCollection] = useState(null);
 
   // Get the URL parameter: collectionId
-  const { collectionId } = useParams();    
+  const { collectionId } = useParams();
 
   // GET collection by id
-  const getCollection = () => {  
+  const getCollection = () => {
+    // Get the token from the localStorage
+    const storedToken = localStorage.getItem("authToken");
+
     axios
-      .get(`${API_URL}/api/collections/${collectionId}`)
+      .get(`${API_URL}/api/collections/${collectionId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
-        console.log(`From collectiondetails - response:`, response)
+        console.log(`From collectiondetails - response:`, response);
         const oneCollection = response.data;
-        console.log(`From collectiondetails - oneCollection:`, oneCollection)
+        console.log(`From collectiondetails - oneCollection:`, oneCollection);
         setCollection(oneCollection);
       })
       .catch((error) => console.log(error));
   };
 
-  console.log(`From collection:`, collection)
-  
-  useEffect(()=> {
-    getCollection();
-  }, [] );
-  console.log(` From collectiondetails - collection:`, collection)
+  console.log(`From collection:`, collection);
 
-  
+  useEffect(() => {
+    getCollection();
+  }, []);
+  console.log(` From collectiondetails - collection:`, collection);
+
   return (
     <div className="CollectionDetails">
       {collection && (
@@ -43,12 +47,10 @@ function CollectionDetailsPage (props) {
         </>
       )}
 
-      <AddCard refreshCollection={getCollection} collectionId={collectionId} />    
-      
-     
-      { collection && collection.cards.map((card) => (
-        <CardList key={card._id} {...card} /> 
-      ))}
+      <AddCard refreshCollection={getCollection} collectionId={collectionId} />
+
+      {collection &&
+        collection.cards.map((card) => <CardList key={card._id} {...card} />)}
 
       <Link to="/collections">
         <button>Back to collections</button>
@@ -56,7 +58,7 @@ function CollectionDetailsPage (props) {
 
       <Link to={`/collections/${collectionId}/edit`}>
         <button>Edit Collection</button>
-      </Link>      
+      </Link>
     </div>
   );
 }

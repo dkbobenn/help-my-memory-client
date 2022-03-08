@@ -21,17 +21,18 @@ function EditCardPage(props) {
   //console.log(`cardId:`, cardId)
 
   let oneCard = undefined;
- 
 
+  const storedToken = localStorage.getItem("authToken");
 
   useEffect(() => {
+    
     axios
-      .get(`${API_URL}/api/card/${cardId}`)
+      .get(`${API_URL}/api/card/${cardId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         oneCard = response.data;
         //console.log(`From oneCard:`, oneCard);
-
-        
 
         setTitle(oneCard.title);
         setDescription(oneCard.description);
@@ -53,7 +54,9 @@ function EditCardPage(props) {
     //console.log("uploadData: ", uploadData);
 
     axios
-      .post(`${API_URL}/api/fileupload`, uploadData)
+      .post(`${API_URL}/api/fileupload`, uploadData, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         //console.log("response is: ", response.data.path);
         // response carries "fileUrl" which we can use to update the state
@@ -70,87 +73,87 @@ function EditCardPage(props) {
 
     // Make a PUT request to update the card
     axios
-      .put(`${API_URL}/api/card/${cardId}`, requestBody)
+      .put(`${API_URL}/api/card/${cardId}`, requestBody, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         //navigate back to to the collection after update
         navigate(`/collections/${response.data.theCollection}`);
       });
   };
-  
-  if (cardType === "standard") {
-    console.log('standard', cardType)
-  return (
-    <div className="EditCardPage">
-      <h3>Edit the Card</h3>
 
-      <form onSubmit={handleFormSubmit}>
-        <label>Title:</label>
-        <input
-          type="text"
-          name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-
-        <label>Description:</label>
-        <input
-          type="text"
-          name="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-
-<label>File:</label>
-        <input type="file" onChange={(e) => handleFileUpload(e)} />
-        <input type="submit" value="Submit" />
-
-        </form>
-    </div>
-  );
-  } else {
-    console.log('password', cardType)
+  if (cardType == "standard") {
+    console.log("standard", cardType);
     return (
-    <div className="EditCardPage">
-    <h3>Edit the Card</h3>
+      <div className="EditCardPage">
+        <h3>Edit the Card</h3>
 
-    <form onSubmit={handleFormSubmit}>
-        <label>Title:</label>
-        <input
-          type="text"
-          name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+        <form onSubmit={handleFormSubmit}>
+          <label>Title:</label>
+          <input
+            type="text"
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
 
-        <label>Description:</label>
-        <input
-          type="text"
-          name="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
+          <label>Description:</label>
+          <input
+            type="text"
+            name="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
 
+          <label>File:</label>
+          <input type="file" onChange={(e) => handleFileUpload(e)} />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    );
+  } else {
+    console.log("password", cardType);
+    return (
+      <div className="EditCardPage">
+        <h3>Edit the Card</h3>
 
-        <label>Username:</label>
-        <input
-          type="text"
-          name="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+        <form onSubmit={handleFormSubmit}>
+          <label>Title:</label>
+          <input
+            type="text"
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
 
-        <label>Password:</label>
-        <input
-        readOnly
-          type="text"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input type="submit" value="Submit" />
-      </form>
-    </div>
-  );
+          <label>Description:</label>
+          <input
+            type="text"
+            name="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+
+          <label>Username:</label>
+          <input
+            type="text"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+
+          <label>Password:</label>
+          <input
+            readOnly
+            type="text"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    );
   }
 }
 
