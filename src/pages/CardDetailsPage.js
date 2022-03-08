@@ -1,16 +1,21 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-//import EditCardPage from "./pages/EditCardPage";
+//import cryptr from "cryptr";
+
 
 const API_URL = "http://localhost:5005";
 
 let oneCard = undefined;
+let cardType = undefined;
 
 function CardDetailsPage(props) {
   //console.log(`CardDetails - Props:`, props)
   const [card, setCard] = useState(null);
+  const [passwordShown, setPasswordShown] = useState(false);
   const navigate = useNavigate();
+
+  
 
   // Get the URL parameter: cardId
   const { cardId } = useParams();
@@ -21,8 +26,16 @@ function CardDetailsPage(props) {
       .get(`${API_URL}/api/card/${cardId}`)
       .then((response) => {
         //console.log(`From carddetails - response:`, response)
+       
         oneCard = response.data;
-        console.log(`From carddetails - oneCard:`, oneCard);
+        //console.log(`From carddetails - oneCard:`, oneCard);
+        cardType = response.data.cardType
+        //console.log(`From carddetails - cardType:`, cardType);
+
+
+        //const decryptedString = cryptr.decrypt(response.data.password);
+        // console.log(`Decryption`, decryptedString);
+
         setCard(oneCard);
       })
       .catch((error) => console.log(error));
@@ -36,7 +49,7 @@ function CardDetailsPage(props) {
   // Make a DELETE request to delete the Card
   const deleteCard = () => {
     axios
-      .delete(`${API_URL}/api/card/${cardId}/delete`)
+      .delete(`${API_URL}/api/card/${cardId}`)
       .then(() => {
         //console.log(`Delete navigate:`, oneCard.theCollection);
         navigate(`/collections/${oneCard.theCollection}`);
@@ -44,14 +57,19 @@ function CardDetailsPage(props) {
       .catch((err) => console.log(err));
   };
 
-  return (
-    <div className="CardDetails">
+  const togglePassword = () => {
+    
+    setPasswordShown(!passwordShown);
+
+  };
+
+  if (cardType === "standard") {
+    return (
+      <div className="CardDetails">
       {card && (
         <>
           <h1>{card.title}</h1>
           <p>{card.description}</p>
-          <p>{card.username}</p>
-          <p>{card.password}</p>
           <p>{card.fileUrl}</p>
         </>
       )}
@@ -60,8 +78,35 @@ function CardDetailsPage(props) {
         <button>Edit Card</button>
       </Link>
       <button onClick={deleteCard}>Delete Card</button>
+      <button onClick={togglePassword}>Show Password</button>
     </div>
-  );
+    )
+  } else {
+    return (
+      <div className="CardDetails">
+      {card && (
+        <>
+          <h1>{card.title}</h1>
+          <p>{card.description}</p>
+          <p>{card.username}</p>
+          <label>Password:</label>
+          <input
+            type={passwordShown ? "text" : "password"}
+            name="password"
+            value={card.password}
+          />
+        </>
+      )}
+
+      <Link to={`/card/${cardId}/edit`}>
+        <button>Edit Card</button>
+      </Link>
+      <button onClick={deleteCard}>Delete Card</button>
+      <button onClick={togglePassword}>Show Password</button>
+    </div>
+    );
+  }
+  
 }
 
 export default CardDetailsPage;

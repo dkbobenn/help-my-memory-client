@@ -53,7 +53,7 @@ function EditCollectionPage(props) {
 
     // Make a PUT request to update the collection
     axios
-      .put(`${API_URL}/api/collections/${collectionId}/edit`, requestBody)
+      .put(`${API_URL}/api/collections/${collectionId}`, requestBody)
       .then((response) => {
         //navigate back to collections page after update
         navigate("/collections/" + collectionId);
@@ -63,7 +63,7 @@ function EditCollectionPage(props) {
   // Make a DELETE request to delete the Collection
   const deleteCollection = () => {
     axios
-      .delete(`${API_URL}/api/collections/${collectionId}/delete`)
+      .delete(`${API_URL}/api/collections/${collectionId}`)
       .then(() => {
         navigate("/collections");
       })

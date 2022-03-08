@@ -1,8 +1,5 @@
 import { useState, useRef } from "react";
 import axios from "axios";
-import { render } from "@testing-library/react";
-//import PasswordCard from "../components/PasswordCard";
-//import StandardCard from "../components/StandardCard";
 
 const API_URL = "http://localhost:5005";
 
@@ -16,8 +13,6 @@ function AddCards(props) {
   const [fileInput, setFileInput] = useState(null);
   const [passwordShown, setPasswordShown] = useState(false);
   const fileInputRef = useRef();
-
-
 
   // ******** this method handles the file upload ********
   const handleFileUpload = (e) => {
@@ -56,14 +51,14 @@ function AddCards(props) {
       collectionId,
     };
 
-    console.log(`Addcards reqbody:`, requestBody);
-    console.log(`From cardType:`, cardType);
+    // console.log(`Addcards reqbody:`, requestBody);
+    // console.log(`From cardType:`, cardType);
 
     //POST for adding cards
     axios
       .post(`${API_URL}/api/cards`, requestBody)
       .then((response) => {
-        console.log(`Addcards response:`, response);
+        //console.log(`Addcards response:`, response);
         // Reset the state to clear the inputs
         setTitle("");
         setDescription("");
@@ -80,9 +75,7 @@ function AddCards(props) {
   };
 
   const togglePassword = () => {
-
     setPasswordShown(!passwordShown);
-
   };
 
   if (cardType === "standard") {
@@ -166,12 +159,13 @@ function AddCards(props) {
 
           <label>Password:</label>
           <input
+            readonly
             type={passwordShown ? "text" : "password"}
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          
+
           <button type="submit">Add Card</button>
         </form>
         <button onClick={togglePassword}>Show Password</button>

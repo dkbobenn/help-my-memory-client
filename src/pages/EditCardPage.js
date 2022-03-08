@@ -4,6 +4,8 @@ import axios from "axios";
 
 const API_URL = "http://localhost:5005";
 
+let cardType = undefined;
+
 function EditCardPage(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -19,13 +21,17 @@ function EditCardPage(props) {
   //console.log(`cardId:`, cardId)
 
   let oneCard = undefined;
+ 
 
   useEffect(() => {
     axios
       .get(`${API_URL}/api/card/${cardId}`)
       .then((response) => {
         oneCard = response.data;
-        console.log(`From oneCard:`, oneCard);
+        //console.log(`From oneCard:`, oneCard);
+
+        cardType = response.data.cardType
+        console.log(`From carddetails - cardType:`, cardType);
 
         setTitle(oneCard.title);
         setDescription(oneCard.description);
@@ -64,13 +70,15 @@ function EditCardPage(props) {
 
     // Make a PUT request to update the card
     axios
-      .put(`${API_URL}/api/card/${cardId}/edit`, requestBody)
+      .put(`${API_URL}/api/card/${cardId}`, requestBody)
       .then((response) => {
         //navigate back to to the collection after update
         navigate(`/collections/${response.data.theCollection}`);
       });
   };
-
+  
+  if (cardType === "standard") {
+    console.log('standard', cardType)
   return (
     <div className="EditCardPage">
       <h3>Edit the Card</h3>
@@ -92,6 +100,37 @@ function EditCardPage(props) {
           onChange={(e) => setDescription(e.target.value)}
         />
 
+<label>File:</label>
+        <input type="file" onChange={(e) => handleFileUpload(e)} />
+        <input type="submit" value="Submit" />
+
+        </form>
+    </div>
+  );
+  } else {
+    console.log('password', cardType)
+    return (
+    <div className="EditCardPage">
+    <h3>Edit the Card</h3>
+
+    <form onSubmit={handleFormSubmit}>
+        <label>Title:</label>
+        <input
+          type="text"
+          name="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+
+        <label>Description:</label>
+        <input
+          type="text"
+          name="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+
         <label>Username:</label>
         <input
           type="text"
@@ -107,14 +146,11 @@ function EditCardPage(props) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-
-        <label>File:</label>
-        <input type="file" onChange={(e) => handleFileUpload(e)} />
-
         <input type="submit" value="Submit" />
       </form>
     </div>
   );
+  }
 }
 
 export default EditCardPage;
