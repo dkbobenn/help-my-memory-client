@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-//import cryptr from "cryptr";
+
 
 
 const API_URL = "http://localhost:5005";
@@ -25,16 +25,13 @@ function CardDetailsPage(props) {
     axios
       .get(`${API_URL}/api/card/${cardId}`)
       .then((response) => {
-        //console.log(`From carddetails - response:`, response)
+        console.log(`From carddetails - response:`, response)
        
         oneCard = response.data;
-        //console.log(`From carddetails - oneCard:`, oneCard);
+        console.log(`From carddetails - oneCard:`, oneCard);
         cardType = response.data.cardType
-        //console.log(`From carddetails - cardType:`, cardType);
+        console.log(`From carddetails - cardType:`, cardType);
 
-
-        //const decryptedString = cryptr.decrypt(response.data.password);
-        // console.log(`Decryption`, decryptedString);
 
         setCard(oneCard);
       })
@@ -63,7 +60,7 @@ function CardDetailsPage(props) {
 
   };
 
-  if (cardType === "standard") {
+  if (cardType == "standard") {
     return (
       <div className="CardDetails">
       {card && (
@@ -91,6 +88,7 @@ function CardDetailsPage(props) {
           <p>{card.username}</p>
           <label>Password:</label>
           <input
+          readOnly
             type={passwordShown ? "text" : "password"}
             name="password"
             value={card.password}

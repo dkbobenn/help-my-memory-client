@@ -23,6 +23,7 @@ function EditCardPage(props) {
   let oneCard = undefined;
  
 
+
   useEffect(() => {
     axios
       .get(`${API_URL}/api/card/${cardId}`)
@@ -30,8 +31,7 @@ function EditCardPage(props) {
         oneCard = response.data;
         //console.log(`From oneCard:`, oneCard);
 
-        cardType = response.data.cardType
-        console.log(`From carddetails - cardType:`, cardType);
+        
 
         setTitle(oneCard.title);
         setDescription(oneCard.description);
@@ -141,6 +141,7 @@ function EditCardPage(props) {
 
         <label>Password:</label>
         <input
+        readOnly
           type="text"
           name="password"
           value={password}

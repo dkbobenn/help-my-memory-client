@@ -159,7 +159,6 @@ function AddCards(props) {
 
           <label>Password:</label>
           <input
-            readonly
             type={passwordShown ? "text" : "password"}
             name="password"
             value={password}
