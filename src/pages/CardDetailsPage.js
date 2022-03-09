@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
 
 const API_URL = "https://help-my-memory.herokuapp.com";
@@ -61,14 +61,19 @@ function CardDetailsPage(props) {
   };
 
   if (cardType === "standard") {
-    console.log("standard:", cardType);
+    console.log("fileUrl", card.fileUrl);
     return (
       <div className="CardDetails">
         {card && (
           <>
             <h1>{card.title}</h1>
             <p>{card.description}</p>
-            <p>{card.fileUrl}</p>
+
+            <p>
+              <a href={card.fileUrl} target="_blank">
+                Get Your File
+              </a>
+            </p>
           </>
         )}
 

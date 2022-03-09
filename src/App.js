@@ -38,7 +38,7 @@ function App() {
           }
         />
         <Route
-          path="/collections/:collectionId"
+          path="/collections/:collectionId/edit"
           element={
             <IsPrivate>
               <EditCollectionPage />

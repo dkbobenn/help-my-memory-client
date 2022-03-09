@@ -64,11 +64,12 @@ function AddCollection(props) {
 
   return (
     <div className="AddCollection">
-      <h3>Add Collection</h3>
+      <h3 className="AddCollectionHeader">Add New Collection</h3>
 
-      <form onSubmit={handleSubmit}>
-        <label>Title:</label>
+      <form className="AddCollectionForm" onSubmit={handleSubmit}>
         <input
+          className="TitleInput"
+          placeholder="Title"
           type="text"
           name="title"
           value={title}
@@ -76,10 +77,14 @@ function AddCollection(props) {
         />
 
         <input
+          className="InputFile"
           type="file"
           onChange={(e) => handleFileUpload(e)}
           ref={imageInputRef}
+          name="file"
+          id="file"
         />
+        <label for="file">Choose a Image</label>
 
         <button type="submit">Save New Collection</button>
       </form>

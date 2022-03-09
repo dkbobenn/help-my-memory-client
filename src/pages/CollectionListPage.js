@@ -28,17 +28,30 @@ function CollectionListPage() {
 
   return (
     <div className="CollectionListPage">
-      <AddCollection refreshCollections={getAllCollections} />
-
-      {collections.map((collection) => {
-        return (
-          <div className="CollectionCard card" key={collection._id}>
-            <Link to={`/collections/${collection._id}`}>
-              <h3>{collection.title}</h3>
-            </Link>
-          </div>
-        );
-      })}
+      <div>
+        <AddCollection refreshCollections={getAllCollections} />
+      </div>
+      <div className="CollectionsList">
+        {collections.map((collection) => {
+          return (
+            <div className="CollectionsCards" key={collection._id}>
+              <Link
+                className="CollectionsLink"
+                to={`/collections/${collection._id}`}
+              >
+                <h3 className="CollectionsHeader">{collection.title}</h3>
+                <img
+                  className="CollectionsImage"
+                  src={collection.imageUrl}
+                  alt=""
+                  width="300"
+                  height="300"
+                ></img>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -5,20 +5,30 @@ import { AuthContext } from "../context/auth.context";
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
   return (
-    <nav>
+    <nav className='Navbar'>
+    <div className='Navbar-Left'>
+    <img className='Navbar-Image' src="/navbar-image2.jpg" alt="Girl in a jacket" width="110" height="70"></img>
+  <h3 className='Navbar-Header'>Help Your Memory</h3>
       <Link to="/">
         <button>Home</button>
       </Link>
 
-      {isLoggedIn && (
-        <>
-          <Link to="/collections">
+      <Link to="/collections">
             <button>Collections</button>
           </Link>
+</div>
+
+<div className='Navbar-Right'>
+      {isLoggedIn && (
+        <>
+        
           <button onClick={logOutUser}>Logout</button>
-          <span>{user && user.name}</span>
+          <div className='Navbar-User'>
+          <span className='Navbar-User-Text'>{user && user.name}</span>
+          </div>
         </>
       )}
+
 
       {!isLoggedIn && (
         <>
@@ -32,6 +42,7 @@ function Navbar() {
           </Link>
         </>
       )}
+      </div>
     </nav>
   );
 }
