@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import AddCard from "../components/AddCard";
 import CardList from "../components/CardList";
-//import CardDetailsPage from "./pages/CardDetailsPage";
 import axios from "axios";
 
 const API_URL = "http://localhost:5005";

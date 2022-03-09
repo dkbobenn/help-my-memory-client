@@ -12,7 +12,8 @@ function EditCardPage(props) {
   const [fileUrl, setFileUrl] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [cardType, setCardType] = useState("standard");
+  const [cardType, setCardType] = useState("");
+  const [passwordShown, setPasswordShown] = useState(false);
   const navigate = useNavigate();
 
   console.log(`EditCard props:`, props);
@@ -26,7 +27,6 @@ function EditCardPage(props) {
   const storedToken = localStorage.getItem("authToken");
 
   useEffect(() => {
-    
     axios
       .get(`${API_URL}/api/card/${cardId}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
@@ -40,7 +40,7 @@ function EditCardPage(props) {
         setFileUrl(oneCard.fileUrl);
         setUsername(oneCard.username);
         setPassword(oneCard.password);
-        setCardType(oneCard.cardType)
+        setCardType(oneCard.cardType);
       })
       .catch((error) => console.log(error));
   }, [cardId]);
@@ -82,6 +82,10 @@ function EditCardPage(props) {
         //navigate back to to the collection after update
         navigate(`/collections/${response.data.theCollection}`);
       });
+  };
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
   };
 
   if (cardType === "standard") {
@@ -152,7 +156,9 @@ function EditCardPage(props) {
             onChange={(e) => setPassword(e.target.value)}
           />
           <input type="submit" value="Submit" />
+          <button onClick={togglePassword}>Show Password</button>
         </form>
+       
       </div>
     );
   }

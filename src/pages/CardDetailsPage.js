@@ -75,7 +75,6 @@ function CardDetailsPage(props) {
           <button>Edit Card</button>
         </Link>
         <button onClick={deleteCard}>Delete Card</button>
-        <button onClick={togglePassword}>Show Password</button>
       </div>
     );
   } else {
