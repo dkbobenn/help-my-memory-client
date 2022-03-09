@@ -40,7 +40,9 @@ function EditCollectionPage(props) {
     console.log("uploadData: ", uploadData);
 
     axios
-      .post(`${API_URL}/api/upload`, uploadData, { headers: { Authorization: `Bearer ${storedToken}` } })
+      .post(`${API_URL}/api/upload`, uploadData, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         console.log("response is: ", response.data.path);
         // response carries "fileUrl" which we can use to update the state

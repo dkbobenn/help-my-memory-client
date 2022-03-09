@@ -22,12 +22,13 @@ function AddCards(props) {
 
     uploadData.append("fileUrl", e.target.files[0]);
 
-    
     // Get the token from the localStorage
-    const storedToken = localStorage.getItem('authToken');
+    const storedToken = localStorage.getItem("authToken");
 
     axios
-      .post(`${API_URL}/api/fileupload`, uploadData, { headers: { Authorization: `Bearer ${storedToken}` } })
+      .post(`${API_URL}/api/fileupload`, uploadData, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         //console.log("response is: ", response.data.path);
         // response carries "fileUrl" which we can use to update the state
@@ -57,11 +58,13 @@ function AddCards(props) {
     // console.log(`From cardType:`, cardType);
 
     // Get the token from the localStorage
-    const storedToken = localStorage.getItem('authToken');
+    const storedToken = localStorage.getItem("authToken");
 
     //POST for adding cards
     axios
-      .post(`${API_URL}/api/cards`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
+      .post(`${API_URL}/api/cards`, requestBody, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         //console.log(`Addcards response:`, response);
         // Reset the state to clear the inputs
