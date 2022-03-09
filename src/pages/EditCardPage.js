@@ -12,6 +12,7 @@ function EditCardPage(props) {
   const [fileUrl, setFileUrl] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [cardType, setCardType] = useState("standard");
   const navigate = useNavigate();
 
   console.log(`EditCard props:`, props);
@@ -32,13 +33,14 @@ function EditCardPage(props) {
       })
       .then((response) => {
         oneCard = response.data;
-        //console.log(`From oneCard:`, oneCard);
+        console.log(`From oneCard:`, oneCard);
 
         setTitle(oneCard.title);
         setDescription(oneCard.description);
         setFileUrl(oneCard.fileUrl);
         setUsername(oneCard.username);
         setPassword(oneCard.password);
+        setCardType(oneCard.cardType)
       })
       .catch((error) => console.log(error));
   }, [cardId]);
@@ -82,8 +84,8 @@ function EditCardPage(props) {
       });
   };
 
-  if (cardType == "standard") {
-    console.log("standard", cardType);
+  if (cardType === "standard") {
+    console.log("standard:", cardType);
     return (
       <div className="EditCardPage">
         <h3>Edit the Card</h3>
@@ -112,7 +114,7 @@ function EditCardPage(props) {
       </div>
     );
   } else {
-    console.log("password", cardType);
+    console.log("password:", cardType);
     return (
       <div className="EditCardPage">
         <h3>Edit the Card</h3>
@@ -144,7 +146,6 @@ function EditCardPage(props) {
 
           <label>Password:</label>
           <input
-            readOnly
             type="text"
             name="password"
             value={password}
