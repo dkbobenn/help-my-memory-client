@@ -150,15 +150,14 @@ function EditCardPage(props) {
 
           <label>Password:</label>
           <input
-            type="text"
+            type={passwordShown ? "text" : "password"}
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <input type="submit" value="Submit" />
-          <button onClick={togglePassword}>Show Password</button>
         </form>
-       
+        <button onClick={togglePassword}>Show Password</button>
       </div>
     );
   }
