@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://help-my-memory.herokuapp.com";
 
 let oneCard = undefined;
 let cardType = undefined;
@@ -60,14 +60,15 @@ function CardDetailsPage(props) {
     setPasswordShown(!passwordShown);
   };
 
-  if (cardType == "standard") {
+  if (cardType === "standard") {
+    console.log("standard:", cardType);
     return (
       <div className="CardDetails">
         {card && (
           <>
             <h1>{card.title}</h1>
             <p>{card.description}</p>
-            <p>{card.fileUrl}</p>
+           <Link><p>{card.fileUrl}</p></Link>
           </>
         )}
 
@@ -78,6 +79,7 @@ function CardDetailsPage(props) {
       </div>
     );
   } else {
+    console.log("password:", cardType);
     return (
       <div className="CardDetails">
         {card && (

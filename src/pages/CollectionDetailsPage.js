@@ -4,7 +4,7 @@ import AddCard from "../components/AddCard";
 import CardList from "../components/CardList";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://help-my-memory.herokuapp.com";
 
 function CollectionDetailsPage(props) {
   console.log(`Props:`, props);
