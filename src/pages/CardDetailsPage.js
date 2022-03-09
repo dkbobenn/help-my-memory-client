@@ -68,7 +68,7 @@ function CardDetailsPage(props) {
           <>
             <h1>{card.title}</h1>
             <p>{card.description}</p>
-           <Link><p>{card.fileUrl}</p></Link>
+            <p>{card.fileUrl}</p>
           </>
         )}
 
