@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://help-my-memory.herokuapp.com";
 
 function SignupPage(props) {
   const [email, setEmail] = useState("");
@@ -67,13 +67,18 @@ function SignupPage(props) {
           onChange={handleName}
         />
 
-        <button className="Button-Submit" type="submit">Sign Up</button>
+        <button className="Button-Submit" type="submit">
+          Sign Up
+        </button>
       </form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <p className='Login-Text'>Already have account?</p>
-      <Link className='Login-Text' to={"/login"}> Login</Link>
+      <p className="Login-Text">Already have account?</p>
+      <Link className="Login-Text" to={"/login"}>
+        {" "}
+        Login
+      </Link>
     </div>
   );
 }

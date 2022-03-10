@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://help-my-memory.herokuapp.com";
 
 function LoginPage(props) {
   const [email, setEmail] = useState("");
@@ -38,28 +38,39 @@ function LoginPage(props) {
 
   return (
     <div className="LoginPage">
-      <h1 className='Login-Header'>Login</h1>
+      <h1 className="Login-Header">Login</h1>
 
-      <form className='LoginPage-Form' onSubmit={handleLoginSubmit}>
-        <label className='Login-Labels'>Email:</label>
-        <input className="Input-Text" type="email" name="email" value={email} onChange={handleEmail} />
-
-        <label  className='Login-Labels'>Password:</label>
+      <form className="LoginPage-Form" onSubmit={handleLoginSubmit}>
+        <label className="Login-Labels">Email:</label>
         <input
-        className="Input-Text"
+          className="Input-Text"
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleEmail}
+        />
+
+        <label className="Login-Labels">Password:</label>
+        <input
+          className="Input-Text"
           type="password"
           name="password"
           value={password}
           onChange={handlePassword}
         />
 
-        <button className="Button-Submit" type="submit">Login</button>
+        <button className="Button-Submit" type="submit">
+          Login
+        </button>
       </form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <p className='Login-Text'>Don't have an account yet?</p>
-      <Link className='Login-Text' to={"/signup"}> Sign Up</Link>
+      <p className="Login-Text">Don't have an account yet?</p>
+      <Link className="Login-Text" to={"/signup"}>
+        {" "}
+        Sign Up
+      </Link>
     </div>
   );
 }
