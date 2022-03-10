@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://help-my-memory.herokuapp.com";
 
 function EditCollectionPage(props) {
   const [title, setTitle] = useState("");
@@ -20,7 +20,6 @@ function EditCollectionPage(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-    
         const oneCollection = response.data;
         setTitle(oneCollection.title);
         setImageUrl(oneCollection.imageUrl);
@@ -41,7 +40,6 @@ function EditCollectionPage(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        
         // response carries "fileUrl" which we can use to update the state
         setImageUrl(response.data.path);
       })

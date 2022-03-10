@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://help-my-memory.herokuapp.com";
 
 function AddCards(props) {
   const [title, setTitle] = useState("");
@@ -16,8 +16,6 @@ function AddCards(props) {
 
   // ******** this method handles the file upload ********
   const handleFileUpload = (e) => {
-    
-
     const uploadData = new FormData();
 
     uploadData.append("fileUrl", e.target.files[0]);
@@ -35,7 +33,6 @@ function AddCards(props) {
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,8 +50,6 @@ function AddCards(props) {
       collectionId,
     };
 
-    
-
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
 
@@ -64,7 +59,6 @@ function AddCards(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        
         // Reset the state to clear the inputs
         setTitle("");
         setDescription("");

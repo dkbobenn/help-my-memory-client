@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://help-my-memory.herokuapp.com";
 
 let oneCard = undefined;
 let cardType = undefined;
@@ -61,20 +61,24 @@ function CardDetailsPage(props) {
           <>
             <h1>{card.title}</h1>
 
-            <div className='Cards-Description-Container'>
-            <p className='Cards-Description'>{card.description}</p>
+            <div className="Cards-Description-Container">
+              <p className="Cards-Description">{card.description}</p>
             </div>
 
             <p>
-              <a className='Cards-Link' href={card.fileUrl}>Get Your File</a>
+              <a className="Cards-Link" href={card.fileUrl}>
+                Get Your File
+              </a>
             </p>
           </>
         )}
-<div className='Card-Button-Container'>
-        <Link to={`/card/${cardId}/edit`}>
-          <button className="NavButtons">Edit Card</button>
-        </Link>
-        <button className="NavButtons" onClick={deleteCard}>Delete Card</button>
+        <div className="Card-Button-Container">
+          <Link to={`/card/${cardId}/edit`}>
+            <button className="NavButtons">Edit Card</button>
+          </Link>
+          <button className="NavButtons" onClick={deleteCard}>
+            Delete Card
+          </button>
         </div>
       </div>
     );

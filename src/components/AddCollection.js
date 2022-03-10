@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import axios from "axios";
 import CollectionListPage from "../pages/CollectionListPage";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://help-my-memory.herokuapp.com";
 
 function AddCollection(props) {
   const [title, setTitle] = useState("");
@@ -12,8 +12,6 @@ function AddCollection(props) {
 
   // ******** this method handles the file upload ********
   const handleFileUpload = (e) => {
-   
-
     const uploadData = new FormData();
     setImageInput(e.target.files[0]);
     uploadData.append("imageUrl", e.target.files[0]);
@@ -26,7 +24,6 @@ function AddCollection(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-       
         // response carries "fileUrl" which we can use to update the state
         setImageUrl(response.data.path);
       })
