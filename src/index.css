@@ -107,14 +107,8 @@ body {
   margin: 5px;
 }
 
-button:hover {
+.NavButtons:hover {
   background-color: hsl(199, 39%, 40%);
-}
-
-button:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
 }
 
 .CollectionsList {
@@ -232,6 +226,7 @@ textarea::placeholder {
   border-radius: 4px;
   cursor: pointer;
 }
+
 
 .AddCards {
   text-align: center;

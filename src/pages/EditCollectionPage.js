@@ -9,13 +9,13 @@ function EditCollectionPage(props) {
   const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
 
+  const storedToken = localStorage.getItem("authToken");
+
   // Get the URL parameter :collectionId
   const { collectionId } = useParams();
   //console.log(collectionId)
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("authToken");
-
     axios
       .get(`${API_URL}/api/collections/${collectionId}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
@@ -59,7 +59,9 @@ function EditCollectionPage(props) {
 
     // Make a PUT request to update the collection
     axios
-      .put(`${API_URL}/api/collections/${collectionId}`, requestBody)
+      .put(`${API_URL}/api/collections/${collectionId}`, requestBody, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         //navigate back to collections page after update
         navigate("/collections/" + collectionId);
