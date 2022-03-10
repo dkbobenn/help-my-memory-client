@@ -25,6 +25,9 @@ Standard Cards: You can input title, description and upload a file to Claudinary
 - jSX
 - HTML
 - CSS
+- NPM React
+- NPM react-router-dom
+- NPM Axios
 
 ### Pages
 
@@ -75,6 +78,3 @@ Bo Bennetsen
 - MongoDB
 - Mongo Atlas
 - Netlify
-- NPM React
-- NPM react-router-dom
-- NPM Axios
