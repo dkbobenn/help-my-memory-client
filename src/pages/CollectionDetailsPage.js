@@ -4,7 +4,7 @@ import AddCard from "../components/AddCard";
 import CardList from "../components/CardList";
 import axios from "axios";
 
-const API_URL = "https://help-my-memory.herokuapp.com";
+const API_URL = "http://localhost:5005";
 
 function CollectionDetailsPage(props) {
   console.log(`Props:`, props);
@@ -52,7 +52,7 @@ function CollectionDetailsPage(props) {
       {collection && (
         <>
           <h1 className="CollectionDetails-Header">
-            You are in Collection: {collection.title}
+            You are in Collection: <br></br> {collection.title}
           </h1>
         </>
       )}

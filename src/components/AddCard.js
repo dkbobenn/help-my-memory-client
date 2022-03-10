@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import axios from "axios";
 
-const API_URL = "https://help-my-memory.herokuapp.com";
+const API_URL = "http://localhost:5005";
 
 function AddCards(props) {
   const [title, setTitle] = useState("");
@@ -186,11 +186,13 @@ function AddCards(props) {
             onChange={(e) => setDescription(e.target.value)}
           />
 
-          <button className="Button-Submit" type="submit">
+          <button className="Button-Submit" type="submit"> 
             Add Card
           </button>
         </form>
-        <button onClick={togglePassword}>Show Password</button>
+      
+
+        <button className='Show-Password-Button' onClick={togglePassword}>Show Password</button>
       </div>
     );
   }

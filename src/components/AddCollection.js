@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import axios from "axios";
 import CollectionListPage from "../pages/CollectionListPage";
 
-const API_URL = "https://help-my-memory.herokuapp.com";
+const API_URL = "http://localhost:5005";
 
 function AddCollection(props) {
   const [title, setTitle] = useState("");
