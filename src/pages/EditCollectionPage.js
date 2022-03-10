@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "https://help-my-memory.herokuapp.com";
+const API_URL = "http://localhost:5005";
 
 function EditCollectionPage(props) {
   const [title, setTitle] = useState("");
@@ -13,7 +13,6 @@ function EditCollectionPage(props) {
 
   // Get the URL parameter :collectionId
   const { collectionId } = useParams();
-  //console.log(collectionId)
 
   useEffect(() => {
     axios
@@ -21,7 +20,7 @@ function EditCollectionPage(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        // console.log(`Get Response:`, response.data)
+    
         const oneCollection = response.data;
         setTitle(oneCollection.title);
         setImageUrl(oneCollection.imageUrl);
@@ -37,20 +36,17 @@ function EditCollectionPage(props) {
 
     uploadData.append("imageUrl", e.target.files[0]);
 
-    console.log("uploadData: ", uploadData);
-
     axios
       .post(`${API_URL}/api/upload`, uploadData, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        console.log("response is: ", response.data.path);
+        
         // response carries "fileUrl" which we can use to update the state
         setImageUrl(response.data.path);
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
-  console.log("imageUrl is: ", imageUrl);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();

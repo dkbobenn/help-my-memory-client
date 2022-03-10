@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "https://help-my-memory.herokuapp.com";
+const API_URL = "http://localhost:5005";
 
 let cardType = undefined;
 
@@ -30,7 +30,7 @@ function EditCardPage(props) {
       })
       .then((response) => {
         oneCard = response.data;
-        console.log(`From oneCard:`, oneCard);
+        
 
         setTitle(oneCard.title);
         setDescription(oneCard.description);
@@ -44,26 +44,23 @@ function EditCardPage(props) {
 
   // ******** this method handles the file upload ********
   const handleFileUpload = (e) => {
-    console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadData = new FormData();
 
     uploadData.append("fileUrl", e.target.files[0]);
-
-    console.log("uploadData: ", uploadData);
 
     axios
       .post(`${API_URL}/api/fileupload`, uploadData, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        console.log("response is: ", response.data.path);
+        
         // response carries "fileUrl" which we can use to update the state
         setFileUrl(response.data.path);
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
-  console.log("fileUrl is: ", fileUrl);
+  
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -88,11 +85,12 @@ function EditCardPage(props) {
   if (cardType === "standard") {
     return (
       <div className="EditCardPage">
-        <h3>Edit the Card</h3>
+        <h3 className="EditCardHeader">Edit the Card</h3>
 
-        <form onSubmit={handleFormSubmit}>
+        <form className="EditCard-Form" onSubmit={handleFormSubmit}>
           <label>Title:</label>
           <input
+           className="Input-Text"
             type="text"
             name="title"
             value={title}
@@ -101,15 +99,17 @@ function EditCardPage(props) {
 
           <label>Description:</label>
           <input
+           className="Input-Text"
             type="text"
             name="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
 
-          <label>File:</label>
-          <input type="file" onChange={(e) => handleFileUpload(e)} />
-          <input type="submit" value="Submit" />
+          <input className="EditCardFile" type="file" onChange={(e) => handleFileUpload(e)} />
+          <label for="file">Choose a File</label>
+
+          <input className="Button-Submit" placeholder=''Title type="submit" value="Submit" />
         </form>
       </div>
     );
@@ -121,6 +121,7 @@ function EditCardPage(props) {
         <form onSubmit={handleFormSubmit}>
           <label>Title:</label>
           <input
+           className="Input-Text"
             type="text"
             name="title"
             value={title}
@@ -129,6 +130,7 @@ function EditCardPage(props) {
 
           <label>Description:</label>
           <input
+           className="Input-Text"
             type="text"
             name="description"
             value={description}
@@ -137,6 +139,7 @@ function EditCardPage(props) {
 
           <label>Username:</label>
           <input
+           className="Input-Text"
             type="text"
             name="username"
             value={username}
@@ -145,6 +148,7 @@ function EditCardPage(props) {
 
           <label>Password:</label>
           <input
+           className="Input-Text"
             type={passwordShown ? "text" : "password"}
             name="password"
             value={password}
@@ -152,7 +156,7 @@ function EditCardPage(props) {
           />
           <input type="submit" value="Submit" />
         </form>
-        <button onClick={togglePassword}>Show Password</button>
+        <button className="Show-Password-Button" onClick={togglePassword}>Show Password</button>
       </div>
     );
   }

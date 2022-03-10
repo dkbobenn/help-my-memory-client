@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import axios from "axios";
 
-const API_URL = "https://help-my-memory.herokuapp.com";
+const API_URL = "http://localhost:5005";
 
 function AddCards(props) {
   const [title, setTitle] = useState("");
@@ -16,7 +16,7 @@ function AddCards(props) {
 
   // ******** this method handles the file upload ********
   const handleFileUpload = (e) => {
-    //console.log("The file to be uploaded is: ", e.target.files[0]);
+    
 
     const uploadData = new FormData();
 
@@ -30,13 +30,12 @@ function AddCards(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        //console.log("response is: ", response.data.path);
         // response carries "fileUrl" which we can use to update the state
         setFileUrl(response.data.path);
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
-  //console.log("fileUrl is: ", fileUrl);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,8 +53,7 @@ function AddCards(props) {
       collectionId,
     };
 
-    // console.log(`Addcards reqbody:`, requestBody);
-    // console.log(`From cardType:`, cardType);
+    
 
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
@@ -66,7 +64,7 @@ function AddCards(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        //console.log(`Addcards response:`, response);
+        
         // Reset the state to clear the inputs
         setTitle("");
         setDescription("");

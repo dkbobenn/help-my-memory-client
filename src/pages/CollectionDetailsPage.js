@@ -4,10 +4,10 @@ import AddCard from "../components/AddCard";
 import CardList from "../components/CardList";
 import axios from "axios";
 
-const API_URL = "https://help-my-memory.herokuapp.com";
+const API_URL = "http://localhost:5005";
 
 function CollectionDetailsPage(props) {
-  console.log(`Props:`, props);
+  
   const [collection, setCollection] = useState(null);
 
   // Get the URL parameter: collectionId
@@ -23,15 +23,15 @@ function CollectionDetailsPage(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        console.log(`From collectiondetails - response:`, response);
+        
         const oneCollection = response.data;
-        console.log(`From collectiondetails - oneCollection:`, oneCollection);
+        
         setCollection(oneCollection);
       })
       .catch((error) => console.log(error));
   };
 
-  console.log(`From collection:`, collection);
+  
 
   useEffect(() => {
     getCollection();
