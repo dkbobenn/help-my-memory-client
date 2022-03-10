@@ -10,11 +10,11 @@ function Navbar() {
     <img className='Navbar-Image' src="/navbar-image2.jpg" alt="Girl in a jacket" width="110" height="70"></img>
   <h3 className='Navbar-Header'>Help Your Memory</h3>
       <Link to="/">
-        <button>Home</button>
+        <button className='NavButtons'>Home</button>
       </Link>
 
       <Link to="/collections">
-            <button>Collections</button>
+            <button className='NavButtons'>Collections</button>
           </Link>
 </div>
 
@@ -22,7 +22,7 @@ function Navbar() {
       {isLoggedIn && (
         <>
         
-          <button onClick={logOutUser}>Logout</button>
+          <button className='NavButtons' onClick={logOutUser}>Logout</button>
           <div className='Navbar-User'>
           <span className='Navbar-User-Text'>{user && user.name}</span>
           </div>
@@ -34,11 +34,11 @@ function Navbar() {
         <>
           <Link to="/signup">
             {" "}
-            <button>Sign Up</button>{" "}
+            <button className='NavButtons'>Sign Up</button>{" "}
           </Link>
           <Link to="/login">
             {" "}
-            <button>Login</button>{" "}
+            <button className='NavButtons'>Login</button>{" "}
           </Link>
         </>
       )}

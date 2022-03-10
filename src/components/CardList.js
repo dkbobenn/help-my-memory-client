@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 // We are deconstructing the props object directly in the parentheses of the function
 function CardList({ title, description, _id }) {
   return (
-    <div className="CollectionCard card" key={_id}>
-      <Link to={`/card/${_id}`}>
-        <h3>{title}</h3>
-        <h3>{description}</h3>
+    <div className="Cards" key={_id}>
+      <Link className="Cards-Link" to={`/card/${_id}`}>
+        <h3 className='Cards-Text'>{title}</h3>
+        <h3 className='Cards-Text'>{description}</h3>
       </Link>
     </div>
   );

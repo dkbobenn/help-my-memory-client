@@ -40,24 +40,29 @@ function CollectionDetailsPage(props) {
 
   return (
     <div className="CollectionDetails">
+      <div className="CollectionDetails-Buttons">
+        <Link to="/collections">
+          <button className="NavButtons">Back to collections</button>
+        </Link>
+
+        <Link to={`/collections/${collectionId}/edit`}>
+          <button className="NavButtons">Edit Collection</button>
+        </Link>
+      </div>
       {collection && (
         <>
-          <h1>{collection.title}</h1>
+          <h1 className="CollectionDetails-Header">
+            You are in Collection: {collection.title}
+          </h1>
         </>
       )}
 
       <AddCard refreshCollection={getCollection} collectionId={collectionId} />
 
-      {collection &&
-        collection.cards.map((card) => <CardList key={card._id} {...card} />)}
-
-      <Link to="/collections">
-        <button>Back to collections</button>
-      </Link>
-
-      <Link to={`/collections/${collectionId}/edit`}>
-        <button>Edit Collection</button>
-      </Link>
+      <div className="Cards-Container">
+        {collection &&
+          collection.cards.map((card) => <CardList key={card._id} {...card} />)}
+      </div>
     </div>
   );
 }

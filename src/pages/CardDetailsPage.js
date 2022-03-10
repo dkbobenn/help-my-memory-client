@@ -8,7 +8,6 @@ let oneCard = undefined;
 let cardType = undefined;
 
 function CardDetailsPage(props) {
-  //console.log(`CardDetails - Props:`, props)
   const [card, setCard] = useState(null);
   const [passwordShown, setPasswordShown] = useState(false);
   const navigate = useNavigate();
@@ -26,12 +25,9 @@ function CardDetailsPage(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        console.log(`From carddetails - response:`, response);
-
         oneCard = response.data;
-        console.log(`From carddetails - oneCard:`, oneCard);
+
         cardType = response.data.cardType;
-        console.log(`From carddetails - cardType:`, cardType);
 
         setCard(oneCard);
       })
@@ -41,7 +37,6 @@ function CardDetailsPage(props) {
   useEffect(() => {
     getCard();
   }, []);
-  // console.log(` From CardDetails - card:`, card)
 
   // Make a DELETE request to delete the Card
   const deleteCard = () => {
@@ -50,7 +45,6 @@ function CardDetailsPage(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then(() => {
-        //console.log(`Delete navigate:`, oneCard.theCollection);
         navigate(`/collections/${oneCard.theCollection}`);
       })
       .catch((err) => console.log(err));
@@ -61,7 +55,6 @@ function CardDetailsPage(props) {
   };
 
   if (cardType === "standard") {
-    console.log("fileUrl", card.fileUrl);
     return (
       <div className="CardDetails">
         {card && (
@@ -70,9 +63,7 @@ function CardDetailsPage(props) {
             <p>{card.description}</p>
 
             <p>
-              <a href={card.fileUrl} target="_blank">
-                Get Your File
-              </a>
+              <a href={card.fileUrl}>Get Your File</a>
             </p>
           </>
         )}
@@ -84,7 +75,6 @@ function CardDetailsPage(props) {
       </div>
     );
   } else {
-    console.log("password:", cardType);
     return (
       <div className="CardDetails">
         {card && (

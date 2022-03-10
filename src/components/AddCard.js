@@ -89,11 +89,11 @@ function AddCards(props) {
   if (cardType === "standard") {
     return (
       <div className="AddCards">
-        <h3>Add New Card</h3>
+        <h3 className="AddCardHeader">Add a New Memory Card</h3>
 
-        <form onSubmit={handleSubmit}>
-          <h3>Select Memory Card Type</h3>
+        <form className="AddCards-Form" onSubmit={handleSubmit}>
           <select
+            class="SelectCard"
             value={cardType}
             onChange={(e) => setCardType(e.target.value)}
           >
@@ -101,39 +101,48 @@ function AddCards(props) {
             <option value="password">Password</option>
           </select>
 
-          <label>Title:</label>
           <input
+            className="Input-Text"
             type="text"
             name="title"
+            placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
 
-          <label>Description:</label>
           <textarea
+            className="Input-Text"
             type="text"
             name="description"
+            placeholder="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
 
           <input
+            className="InputFile"
+            id="file"
+            name="file"
             type="file"
             ref={fileInputRef}
             onChange={(e) => handleFileUpload(e)}
           />
-          <button type="submit">Add Card</button>
+          <label for="file">Choose a File</label>
+
+          <button className="Button-Submit" type="submit">
+            Add Card
+          </button>
         </form>
       </div>
     );
   } else {
     return (
       <div className="AddCards">
-        <h3>Add New Card</h3>
+        <h3 className="AddCardHeader">Add a New Memory Card</h3>
 
-        <form onSubmit={handleSubmit}>
-          <h3>Select Memory Card Type</h3>
+        <form className="AddCards-Form" onSubmit={handleSubmit}>
           <select
+            class="SelectCard"
             value={cardType}
             onChange={(e) => setCardType(e.target.value)}
           >
@@ -141,39 +150,45 @@ function AddCards(props) {
             <option value="password">Password</option>
           </select>
 
-          <label>Title:</label>
           <input
+            className="Input-Text"
             type="text"
             name="title"
+            placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
 
-          <label>Description:</label>
-          <textarea
+          <input
+            className="Input-Text"
             type="text"
-            name="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-
-          <label>Username:</label>
-          <textarea
-            type="text"
-            name="description"
+            name="username"
+            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
 
-          <label>Password:</label>
           <input
+            className="Input-Text"
             type={passwordShown ? "text" : "password"}
             name="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button type="submit">Add Card</button>
+          <textarea
+            className="Input-Text"
+            type="text"
+            name="description"
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+
+          <button className="Button-Submit" type="submit">
+            Add Card
+          </button>
         </form>
         <button onClick={togglePassword}>Show Password</button>
       </div>

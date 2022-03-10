@@ -16,11 +16,8 @@ function EditCardPage(props) {
   const [passwordShown, setPasswordShown] = useState(false);
   const navigate = useNavigate();
 
-  console.log(`EditCard props:`, props);
-
   // Get the URL parameter :cardId
   const { cardId } = useParams();
-  //console.log(`cardId:`, cardId)
 
   let oneCard = undefined;
 
@@ -47,26 +44,26 @@ function EditCardPage(props) {
 
   // ******** this method handles the file upload ********
   const handleFileUpload = (e) => {
-    //console.log("The file to be uploaded is: ", e.target.files[0]);
+    console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadData = new FormData();
 
     uploadData.append("fileUrl", e.target.files[0]);
 
-    //console.log("uploadData: ", uploadData);
+    console.log("uploadData: ", uploadData);
 
     axios
       .post(`${API_URL}/api/fileupload`, uploadData, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        //console.log("response is: ", response.data.path);
+        console.log("response is: ", response.data.path);
         // response carries "fileUrl" which we can use to update the state
         setFileUrl(response.data.path);
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
-  //console.log("fileUrl is: ", fileUrl);
+  console.log("fileUrl is: ", fileUrl);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -89,7 +86,6 @@ function EditCardPage(props) {
   };
 
   if (cardType === "standard") {
-    console.log("standard:", cardType);
     return (
       <div className="EditCardPage">
         <h3>Edit the Card</h3>
@@ -118,7 +114,6 @@ function EditCardPage(props) {
       </div>
     );
   } else {
-    console.log("password:", cardType);
     return (
       <div className="EditCardPage">
         <h3>Edit the Card</h3>

@@ -1,32 +1,5 @@
-
 body {
   margin: 0;
-}
-
-a {
-  list-style: none;
-  color: black;
-}
-
-button,
-select {
-  padding: 5px 10px;
-  min-width: 50px;
-  margin: 5px;
-  font-size: 18px;
-}
-
-label {
-  width: 200px;
-  display: block;
-}
-
-input,
-textarea {
-  width: 200px;
-  padding: 10px;
-  display: inline-block;
-  margin: 10px;
 }
 
 .Navbar {
@@ -51,7 +24,6 @@ textarea {
   color: white;
   font-size: 24px;
   font-weight: 600;
-
 }
 
 .Navbar-Left {
@@ -85,19 +57,19 @@ textarea {
 }
 
 .Navbar-User-Text {
-font-size: 20px;
-font-weight: bold;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .Navbar-Image {
-  position: absolute; 
+  position: absolute;
   left: 0px;
   top: 0px;
   z-index: +1;
 }
 
 .Homepage {
- text-align: left;
+  text-align: left;
 }
 .Homepage-Image {
   display: block;
@@ -119,7 +91,7 @@ font-weight: bold;
   line-height: 200%;
 }
 
-button {
+.NavButtons {
   display: inline-block;
   padding: 5px 5px;
   font-size: 24px;
@@ -132,9 +104,12 @@ button {
   border: none;
   border-radius: 5px;
   box-shadow: 0 4px #999;
+  margin: 5px;
 }
 
-button:hover {background-color: hsl(199, 39%, 40%)}
+button:hover {
+  background-color: hsl(199, 39%, 40%);
+}
 
 button:active {
   background-color: #3e8e41;
@@ -155,62 +130,40 @@ button:active {
   width: 300px;
   height: 350px;
   margin: 30px;
-  box-shadow:5px 5px 5px #333;
-background:#62929B;
-padding:0px;
-padding-bottom: 13px;
-border-radius:5px;
-text-align: center;
-border-style: solid;
-border-color: #333;
-border-width: 5px;
+  box-shadow: 5px 5px 5px #333;
+  background: #62929b;
+  padding-bottom: 13px;
+  border-radius: 5px;
+  text-align: center;
+  border-style: solid;
+  border-color: #333;
+  border-width: 5px;
 }
 
 .CollectionsHeader {
-  font-size: 60px;
-}
-
-.CollectionsHeader {
-  color: white;
+  color: #666;
+  font-weight: bold;
   font-size: 20px;
+  font-family: "georgia";
 }
 
-.CollectionsImage{
+.CollectionsImage {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  margin-bottom: 5px;;
+  margin-bottom: 5px;
 }
 
 .CollectionsLink {
   color: white;
   text-decoration: none;
+  font-style: italic;
 }
 .AddCollection {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
-}
-input[type=text], select {
-  width: 20%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-button[type=submit] {
-  width: 20%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 16px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 .AddCollectionForm {
@@ -228,11 +181,11 @@ button[type=submit] {
 
 .InputFile {
   width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 
 .InputFile + label {
@@ -244,66 +197,127 @@ button[type=submit] {
   color: white;
   background-color: black;
   display: inline-block;
-  cursor: pointer; 
+  cursor: pointer;
   padding: 12px;
 }
 .InputFile:focus + label,
 .InputFile + label:hover {
-    background-color:#4CAF50;;
+  background-color: #4caf50;
 }
 
-.TitleInput {
-  text-align: center;
-  font-size: 1.25em;
-}
-
-
-.card {
-  width: 400px;
-  padding: 10px;
-  box-shadow: 0px 2px 3px grey;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  background: #94a7c8;
+.Input-Text {
+  width: 380px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
   border-radius: 4px;
-}
-
-.ProjectCard h3::after {
-  content: url("https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/m3/icon-expand.png");
-  margin-left: 5px;
-}
-
-.EditProjectPage,
-.AddProject,
-.AddTask {
-  background: #f9eec3;
-  border: 1px solid grey;
-  box-shadow: 0px 2px 3px grey;
-  width: 400px;
+  box-sizing: border-box;
   text-align: center;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  padding: 10px;
+  font-size: 1em;
+}
+textarea::placeholder {
+  font-size: 1.3em;
+}
+
+.Button-Submit {
+  width: 380px;
+  height: 50px;
+  font-size: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 16px;
+  margin: 8px 0;
+  border: none;
   border-radius: 4px;
+  cursor: pointer;
 }
 
-.EditProjectPage {
-  background-color: rgb(239, 196, 88);
+.AddCards {
+  text-align: center;
 }
 
-.EditProjectPage form,
-.AddTask form,
-.AddProject form {
+.AddCards-Form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
-.AddTask button,
-.AddProject button {
-  display: block;
+.SelectCard {
+  height: 42px;
+  width: 380px;
+  border: 1px solid;
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
 }
 
-.TaskCard {
-  background-color: #dfeef9;
+.AddCardHeader {
+  font-size: 30px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  width: 400px;
+  margin-left: 810px;
+}
+
+.Cards {
+  width: 300px;
+  height: 350px;
+  margin: 30px;
+  box-shadow: 5px 5px 5px #333;
+  background: #62929b;
+  padding-bottom: 13px;
+  border-radius: 5px;
+  text-align: center;
+  border-style: solid;
+  border-color: #333;
+  border-width: 5px;
+}
+
+.Cards-Text {
+  color: #666;
+  font-weight: bold;
+  font-size: 30px;
+  font-family: "georgia";
+}
+.Cards-Link {
+  color: white;
+  text-decoration: none;
+  font-style: italic;
+}
+
+.CollectionDetails {
+  background-color: #f2f2f2;
+}
+.Cards-Container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.CollectionDetails-Header {
+  float: right;
+  margin-right: 20px;
+  border-style: solid;
+  border-radius: 15px;
+  height: 75px;
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+  background-color: #0e2f5a;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  font-family: "georgia";
+  font-style: italic;
+}
+
+.CollectionDetails-Buttons {
+  width: 450px;
+  float: left;
+  margin-left: 0px;
 }

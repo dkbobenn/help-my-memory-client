@@ -34,13 +34,13 @@ function AddCollection(props) {
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
-  console.log("imageUrl is: ", imageUrl);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const requestBody = { title, imageUrl };
-    console.log(requestBody);
+    console.log("Test 2 - req.body is:", requestBody);
+    console.log("Test 2 - imageUrl is: ", imageUrl);
 
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
@@ -68,7 +68,7 @@ function AddCollection(props) {
 
       <form className="AddCollectionForm" onSubmit={handleSubmit}>
         <input
-          className="TitleInput"
+          className="Input-Text"
           placeholder="Title"
           type="text"
           name="title"
@@ -86,7 +86,9 @@ function AddCollection(props) {
         />
         <label for="file">Choose a Image</label>
 
-        <button type="submit">Save New Collection</button>
+        <button className="Button-Submit" type="submit">
+          Save New Collection
+        </button>
       </form>
     </div>
   );
