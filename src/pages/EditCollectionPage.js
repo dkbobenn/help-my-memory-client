@@ -78,24 +78,30 @@ function EditCollectionPage(props) {
 
   return (
     <div className="EditCollectionPage">
-      <h3>Edit the Collection</h3>
+      <h3 className="EditCollectionHeader">Edit the Collection</h3>
 
-      <form onSubmit={handleFormSubmit}>
-        <label>Title:</label>
+      <form className="EditCollection-Form" onSubmit={handleFormSubmit}>
         <input
+          className="Input-Text"
           type="text"
           name="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        <label>Image:</label>
-        <input type="file" onChange={(e) => handleFileUpload(e)} />
+        <input
+          className="EditCardFile"
+          type="file"
+          onChange={(e) => handleFileUpload(e)}
+        />
+        <label for="file">Choose a Image</label>
 
-        <input type="submit" value="Submit" />
+        <input className="Button-Submit" type="submit" value="Submit" />
       </form>
 
-      <button onClick={deleteCollection}>Delete Collection</button>
+      <button className="Button-Submit-Delete" onClick={deleteCollection}>
+        Delete Collection
+      </button>
     </div>
   );
 }

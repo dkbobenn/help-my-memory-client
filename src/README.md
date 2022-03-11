@@ -70,6 +70,9 @@ Bo Bennetsen
 ## Future work
 
 - Enable user to see, when an image or file is uploaded and ready on Claudinary, before you save a collection or card with file upload.
+- Error in Edit collections, cannot upload a new file
+- Error in Edit cards, cannot upload a new file
+- Styling of Card Details page for password cards
 - Styling of EditCollectionsPage
 - Styling of EditCardPage
 

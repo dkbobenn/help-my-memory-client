@@ -88,10 +88,15 @@ function CardDetailsPage(props) {
         {card && (
           <>
             <h1>{card.title}</h1>
-            <p>{card.description}</p>
-            <p>{card.username}</p>
-            <label>Password:</label>
+            <div className="Cards-Description-Container">
+              <p className="Cards-Description">{card.description}</p>
+            </div>
+            <div className="Cards-Username-Container">
+              <p className="Cards-Description">{card.username}</p>
+            </div>
+
             <input
+              className="Cards-Password-Container"
               readOnly
               type={passwordShown ? "text" : "password"}
               name="password"
@@ -101,10 +106,17 @@ function CardDetailsPage(props) {
         )}
 
         <Link to={`/card/${cardId}/edit`}>
-          <button>Edit Card</button>
+          <button className="NavButtons">Edit Card</button>
         </Link>
-        <button onClick={deleteCard}>Delete Card</button>
-        <button onClick={togglePassword}>Show Password</button>
+        <button className="Button-Submit-Delete" onClick={deleteCard}>
+          Delete Card
+        </button>
+        <button
+          className="CardDetails-Password-Button"
+          onClick={togglePassword}
+        >
+          Show Password
+        </button>
       </div>
     );
   }

@@ -84,7 +84,6 @@ function EditCardPage(props) {
         <h3 className="EditCardHeader">Edit the Card</h3>
 
         <form className="EditCard-Form" onSubmit={handleFormSubmit}>
-          <label>Title:</label>
           <input
             className="Input-Text"
             type="text"
@@ -93,7 +92,6 @@ function EditCardPage(props) {
             onChange={(e) => setTitle(e.target.value)}
           />
 
-          <label>Description:</label>
           <input
             className="Input-Text"
             type="text"
@@ -122,10 +120,9 @@ function EditCardPage(props) {
   } else {
     return (
       <div className="EditCardPage">
-        <h3>Edit the Card</h3>
+        <h3 className="EditCardHeader">Edit the Card</h3>
 
-        <form onSubmit={handleFormSubmit}>
-          <label>Title:</label>
+        <form className="EditCard-Form" onSubmit={handleFormSubmit}>
           <input
             className="Input-Text"
             type="text"
@@ -134,7 +131,6 @@ function EditCardPage(props) {
             onChange={(e) => setTitle(e.target.value)}
           />
 
-          <label>Description:</label>
           <input
             className="Input-Text"
             type="text"
@@ -143,7 +139,6 @@ function EditCardPage(props) {
             onChange={(e) => setDescription(e.target.value)}
           />
 
-          <label>Username:</label>
           <input
             className="Input-Text"
             type="text"
@@ -152,7 +147,6 @@ function EditCardPage(props) {
             onChange={(e) => setUsername(e.target.value)}
           />
 
-          <label>Password:</label>
           <input
             className="Input-Text"
             type={passwordShown ? "text" : "password"}
@@ -160,9 +154,9 @@ function EditCardPage(props) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <input type="submit" value="Submit" />
+          <input className="Button-Submit" type="submit" value="Submit" />
         </form>
-        <button className="Show-Password-Button" onClick={togglePassword}>
+        <button className="EditCard-Password-Button" onClick={togglePassword}>
           Show Password
         </button>
       </div>
