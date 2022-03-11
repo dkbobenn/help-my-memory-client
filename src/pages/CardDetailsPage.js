@@ -72,11 +72,11 @@ function CardDetailsPage(props) {
             </p>
           </>
         )}
-        <div className="Card-Button-Container">
+        <div className="CardDetails-Button-Container">
           <Link to={`/card/${cardId}/edit`}>
-            <button className="NavButtons">Edit Card</button>
+            <button className="Edit-Cards-Button">Edit Card</button>
           </Link>
-          <button className="NavButtons" onClick={deleteCard}>
+          <button className="Delete-Cards-Button" onClick={deleteCard}>
             Delete Card
           </button>
         </div>
@@ -105,12 +105,14 @@ function CardDetailsPage(props) {
           </>
         )}
 
-        <Link to={`/card/${cardId}/edit`}>
-          <button className="NavButtons">Edit Card</button>
-        </Link>
-        <button className="Button-Submit-Delete" onClick={deleteCard}>
-          Delete Card
-        </button>
+        <div className="CardDetails-Button-Container">
+          <Link to={`/card/${cardId}/edit`}>
+            <button className="Edit-Cards-Button">Edit Card</button>
+          </Link>
+          <button className="Delete-Cards-Button" onClick={deleteCard}>
+            Delete Card
+          </button>
+        </div>
         <button
           className="CardDetails-Password-Button"
           onClick={togglePassword}

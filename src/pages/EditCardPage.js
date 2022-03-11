@@ -131,10 +131,11 @@ function EditCardPage(props) {
             onChange={(e) => setTitle(e.target.value)}
           />
 
-          <input
+          <textarea
             className="Input-Text"
             type="text"
             name="description"
+            placeholder="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />

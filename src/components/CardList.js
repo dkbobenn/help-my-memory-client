@@ -6,8 +6,8 @@ function CardList({ title, description, _id }) {
   return (
     <div className="Cards" key={_id}>
       <Link className="Cards-Link" to={`/card/${_id}`}>
-        <h3 className='Cards-Text'>{title}</h3>
-        <h3 className='Cards-Text'>{description}</h3>
+        <h3 className='Cards-header'>{title}</h3>
+        <p className='Cards-Text'>{description}</p>
       </Link>
     </div>
   );
