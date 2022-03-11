@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# Help My Memory
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description of the project
 
-## Available Scripts
+This is an simple and easy app to store all kind of information, you would like to remember. The intention is, that this should be a all in one tool for both passwords and general information.
 
-In the project directory, you can run:
+## Instructions
 
-### `npm start`
+You need to sign up, and here after you can start creating collections and memory cards for collections. Collections is meant as high level placeholders for a certain topic. Memory cards, which is the chilren of the collections will store the actual information you would like to store in this app.
+Collections:
+On the collections you upload an image and write a title. The image will be the decoration of your collections card. All images for collections is uploaded to, and hosted on Claudinary.
 
-Runs the app in the development mode.\
-Open [https://help-my-memory.herokuapp.com](https://help-my-memory.herokuapp.com) to view it in your browser.
+Cards:
+You can create two types of memory cards, one meant for passwords, and one called standard for everything else.
+Password Cards: You can input title, description, username and password. The password will be encrypted when stored in the database and decrypted so you can always see it again.
+Standard Cards: You can input title, description and upload a file to Claudinary. You can upload any file type you want, and download the file again for viewing.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Wireframes
 
-### `npm test`
+(https://github.com/dkbobenn/help-my-memory-client/tree/main/public/wireframes.pptx)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Technologies:
 
-### `npm run build`
+- Java Script
+- jSX
+- HTML
+- CSS
+- NPM React
+- NPM react-router-dom
+- NPM Axios
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Pages
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Homepage
+- CollectionListPage
+- CollectionDetailsPage
+- EditCollectionPage
+- CardDetailsPage
+- EditCardspage
+- LoginPage
+- SignupPage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Components
 
-### `npm run eject`
+- AddCard
+- AddCollection
+- CardList
+- Navbar
+- IsAnon
+- IsPrivate
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Other:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Make the styling
+- Setup Heroku and Mongo Atlas connection
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Setup
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+You can find help-my-memory here:
+https://help-my-memory.netlify.app/
 
-## Learn More
+## Project
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+https://github.com/dkbobenn/help-my-memory-client
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Team
 
-### Code Splitting
+Bo Bennetsen
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Future work
 
-### Analyzing the Bundle Size
+- Enable user to see, when an image or file is uploaded and ready on Claudinary, before you save a collection or card with file upload.
+- Error in Edit collections, cannot upload a new file
+- Error in Edit cards, cannot upload a new file
+- Styling of Card Details page for password cards
+- Styling of EditCollectionsPage
+- Styling of EditCardPage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Resources
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- MongoDB
+- Mongo Atlas
+- Netlify
